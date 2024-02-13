@@ -26,3 +26,9 @@ mkdir -p definitions/1.6/
 
 mv spec.d/schemas/json/* definitions/1.6/
 rm definitions/1.6/OCPP-1.6-JSON-Schemas.zip
+
+directory="definitions/1.6/"
+json_files=$(find "$directory" -type f -name "*.json")
+for file in $json_files; do
+  jq '.' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+done
